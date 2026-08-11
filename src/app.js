@@ -1,6 +1,7 @@
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const errorHandler = require('./middleware/errorHandler');
+const taskRoutes = require('./routes/task.routes'); // 1. IMPORT
 
 let swaggerDocument;
 try {
@@ -26,8 +27,8 @@ if (swaggerDocument) {
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 }
 
-const taskRoutes = require('./routes/task.routes');
-app.use('/tasks', taskRoutes);
+// Resource Routes
+app.use('/tasks', taskRoutes); // 2. MOUNT
 
 // Error Handler Middleware
 app.use(errorHandler);
