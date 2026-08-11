@@ -26,6 +26,9 @@ if (swaggerDocument) {
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 }
 
+const taskRoutes = require('./routes/task.routes');
+app.use('/tasks', taskRoutes);
+
 // Error Handler Middleware
 app.use(errorHandler);
 
