@@ -19,6 +19,24 @@ class TaskService {
     }
     return taskRepository.create(title.trim());
   }
+
+    updateTask(id, { title, done }) {
+    if (title !== undefined && (typeof title !== 'string' || title.trim() === '')) {
+        throw new BadRequestError('Title must be a non-empty string');
+    }
+
+    const updated = taskRepository.update(id, title?.trim(), done);
+    if (!updated) throw new NotFoundError('Task not found');
+    return updated;
+    }
+
+    deleteTask(id) {
+    const deleted = taskRepository.delete(id);
+    if (!deleted) throw new NotFoundError('Task not found');
+    }
+
+
+
 }
 
 module.exports = new TaskService();
